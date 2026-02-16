@@ -88,7 +88,7 @@ export interface AuditLog {
   providedIn: 'root'
 })
 export class TicketService {
-  private apiUrl = 'http://127.0.0.1:8000/api/tickets/';
+  private apiUrl = '/api/tickets/';
 
   constructor(private http: HttpClient) { }
 

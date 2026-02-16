@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/auth/';
+  private apiUrl = '/api/auth/';
   private userSubject = new BehaviorSubject<any>(null);
 
   user$ = this.userSubject.asObservable();

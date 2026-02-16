@@ -12,32 +12,22 @@ class Command(BaseCommand):
         admin_password = "123"
         admin_email = "admin@sdc.gov.in"
 
-        # Check if admin already exists
         if User.objects.filter(username=admin_username).exists():
-            admin = User.objects.get(username=admin_username)
-            
-            # Update password and ensure superuser status
-            admin.set_password(admin_password)
-            admin.is_superuser = True
-            admin.is_staff = True
-            admin.is_approved = True
-            admin.is_active = True
-            admin.email = admin_email
-            admin.save()
-            
-            self.stdout.write(self.style.SUCCESS(f"Admin user '{admin_username}' updated"))
-        else:
-            # Create new admin
-            admin = User.objects.create_superuser(
-                username=admin_username,
-                email=admin_email,
-                password=admin_password
-            )
-            admin.is_approved = True
-            admin.role = 'OFFICER'  # Give highest role for UI purposes
-            admin.save()
-            
-            self.stdout.write(self.style.SUCCESS(f"Admin user '{admin_username}' created"))
+            self.stdout.write(self.style.WARNING(
+                f"Admin user '{admin_username}' already exists; no changes made"
+            ))
+            return
+
+        admin = User.objects.create_superuser(
+            username=admin_username,
+            email=admin_email,
+            password=admin_password
+        )
+        admin.is_approved = True
+        admin.role = 'OFFICER'  # Give highest role for UI purposes
+        admin.save()
+        
+        self.stdout.write(self.style.SUCCESS(f"Admin user '{admin_username}' created"))
 
         self.stdout.write(self.style.WARNING(f"Admin username: {admin_username}"))
         self.stdout.write(self.style.WARNING(f"Admin password: {admin_password}"))

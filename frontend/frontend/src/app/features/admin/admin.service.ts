@@ -44,7 +44,7 @@ export interface RequestTypeItem {
   providedIn: 'root'
 })
 export class AdminService {
-  private authApiUrl = 'http://127.0.0.1:8000/api/auth/';
+  private authApiUrl = '/api/auth/';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -113,49 +113,49 @@ export class AdminService {
   }
 
   getTicketTypesAdmin(): Observable<TicketTypeItem[]> {
-    return this.http.get<TicketTypeItem[]>('http://127.0.0.1:8000/api/tickets/admin/ticket-types/', {
+    return this.http.get<TicketTypeItem[]>('/api/tickets/admin/ticket-types/', {
       headers: this.getAuthHeaders()
     });
   }
 
   createTicketType(payload: { name: string }): Observable<TicketTypeItem> {
-    return this.http.post<TicketTypeItem>('http://127.0.0.1:8000/api/tickets/admin/ticket-types/', payload, {
+    return this.http.post<TicketTypeItem>('/api/tickets/admin/ticket-types/', payload, {
       headers: this.getAuthHeaders()
     });
   }
 
   updateTicketType(id: number, payload: { name: string }): Observable<TicketTypeItem> {
-    return this.http.patch<TicketTypeItem>(`http://127.0.0.1:8000/api/tickets/admin/ticket-types/${id}/`, payload, {
+    return this.http.patch<TicketTypeItem>(`/api/tickets/admin/ticket-types/${id}/`, payload, {
       headers: this.getAuthHeaders()
     });
   }
 
   deleteTicketType(id: number): Observable<void> {
-    return this.http.delete<void>(`http://127.0.0.1:8000/api/tickets/admin/ticket-types/${id}/`, {
+    return this.http.delete<void>(`/api/tickets/admin/ticket-types/${id}/`, {
       headers: this.getAuthHeaders()
     });
   }
 
   getRequestTypesAdmin(): Observable<RequestTypeItem[]> {
-    return this.http.get<RequestTypeItem[]>('http://127.0.0.1:8000/api/tickets/admin/request-types/', {
+    return this.http.get<RequestTypeItem[]>('/api/tickets/admin/request-types/', {
       headers: this.getAuthHeaders()
     });
   }
 
   createRequestType(payload: { name: string; ticket_type: number }): Observable<RequestTypeItem> {
-    return this.http.post<RequestTypeItem>('http://127.0.0.1:8000/api/tickets/admin/request-types/', payload, {
+    return this.http.post<RequestTypeItem>('/api/tickets/admin/request-types/', payload, {
       headers: this.getAuthHeaders()
     });
   }
 
   updateRequestType(id: number, payload: { name: string; ticket_type: number }): Observable<RequestTypeItem> {
-    return this.http.patch<RequestTypeItem>(`http://127.0.0.1:8000/api/tickets/admin/request-types/${id}/`, payload, {
+    return this.http.patch<RequestTypeItem>(`/api/tickets/admin/request-types/${id}/`, payload, {
       headers: this.getAuthHeaders()
     });
   }
 
   deleteRequestType(id: number): Observable<void> {
-    return this.http.delete<void>(`http://127.0.0.1:8000/api/tickets/admin/request-types/${id}/`, {
+    return this.http.delete<void>(`/api/tickets/admin/request-types/${id}/`, {
       headers: this.getAuthHeaders()
     });
   }
