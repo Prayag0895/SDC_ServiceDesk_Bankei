@@ -1,0 +1,108 @@
+<div class="create-container">
+  <div class="header">
+    <h2>Submit New Request</h2>
+    <p>Please fill in the details below to raise a new ticket.</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="ticket-form">
+    
+    <div class="form-group">
+      <label>Issue Title <span class="req">*</span></label>
+      <input 
+        type="text" 
+        [(ngModel)]="ticket.title" 
+        name="title" 
+        placeholder="e.g., Internet Connectivity Issue in Lab 3" 
+        required
+      >
+    </div>
+
+    <div class="form-row">
+      
+      <div class="form-group half">
+        <label>Priority <span class="req">*</span></label>
+        <select [(ngModel)]="ticket.priority" name="priority" aria-label="Select ticket priority level" title="Priority selection" required>
+          <option value="" disabled selected>-- Select Priority --</option>
+          @for (p of priorities; track p.code) {
+            <option [value]="p.code">{{ p.label }}</option>
+          }
+        </select>
+        <small class="hint">Higher priority tickets require immediate attention.</small>
+      </div>
+
+      <div class="form-group half">
+        <label>Affected End User (Optional)</label>
+        <input 
+          type="text" 
+          [(ngModel)]="ticket.affected_end_user" 
+          name="affected_end_user" 
+          placeholder="e.g. Dean of Science, or Lab 4 Students"
+        >
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      
+      <div class="form-group half">
+        <label>Category <span class="req">*</span></label>
+        <select 
+          [(ngModel)]="ticket.ticket_type" 
+          name="ticket_type" 
+          aria-label="Select ticket category type" 
+          title="Ticket category selection"
+          (change)="onTypeChange()" 
+          required>
+          <option value="" disabled selected>-- Select Category --</option>
+          @for (type of ticketTypes; track type.id) {
+            <option [value]="type.id">{{ type.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group half">
+        <label>Specific Request</label>
+        <select 
+          [(ngModel)]="ticket.request_type" 
+          name="request_type" 
+          aria-label="Select specific request type" 
+          title="Request type selection"
+          [disabled]="!requestTypes.length">
+          <option value="" disabled selected>
+            {{ requestTypes.length ? '-- Select Request Type --' : '-- Select Category First --' }}
+          </option>
+          @for (req of requestTypes; track req.id) {
+            <option [value]="req.id">{{ req.name }}</option>
+          }
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea 
+        [(ngModel)]="ticket.description" 
+        name="description" 
+        rows="5" 
+        placeholder="Describe the issue in detail..."
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Attachment (Optional)</label>
+      <div class="file-upload-wrapper">
+        <input type="file" (change)="onFileSelected($event)" aria-label="Upload attachment file" title="File attachment upload">
+        <small>Supported formats: PDF, JPG, PNG (Max 5MB)</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+        <span *ngIf="!isSubmitting">Submit Request</span>
+        <span *ngIf="isSubmitting">Processing...</span>
+      </button>
+    </div>
+
+  </form>
+</div>

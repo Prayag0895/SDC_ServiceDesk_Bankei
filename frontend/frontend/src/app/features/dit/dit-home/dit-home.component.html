@@ -1,0 +1,79 @@
+<div class="home-container">
+  
+  <div class="welcome-banner">
+    <div>
+      <h1>Hello, Project Manager!</h1>
+      <p>You have pending requests requiring your attention.</p>
+    </div>
+    <div class="banner-decoration">⚡</div>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading dashboard data...</p>
+    </div>
+  }
+
+  @if (!isLoading && stats) {
+    <div class="stats-grid">
+      
+      <div class="stat-card blue">
+        <div class="icon-wrapper">📂</div>
+        <div class="stat-info">
+          <span class="stat-label">Total Tickets</span>
+          <span class="stat-value">{{ stats.total_tickets }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card orange">
+        <div class="icon-wrapper">⏳</div>
+        <div class="stat-info">
+          <span class="stat-label">Pending Approval</span>
+          <span class="stat-value">{{ stats.pending }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card green">
+        <div class="icon-wrapper">✅</div>
+        <div class="stat-info">
+          <span class="stat-label">Approved</span>
+          <span class="stat-value">{{ stats.approved }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card purple">
+        <div class="icon-wrapper">⚙️</div>
+        <div class="stat-info">
+          <span class="stat-label">In Progress</span>
+          <span class="stat-value">{{ stats.in_progress || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card teal">
+        <div class="icon-wrapper">🏁</div>
+        <div class="stat-info">
+          <span class="stat-label">Completed</span>
+          <span class="stat-value">{{ stats.completed || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card red">
+        <div class="icon-wrapper">🚫</div>
+        <div class="stat-info">
+          <span class="stat-label">Rejected</span>
+          <span class="stat-value">{{ stats.rejected }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card grey">
+        <div class="icon-wrapper">🔒</div>
+        <div class="stat-info">
+          <span class="stat-label">Closed</span>
+          <span class="stat-value">{{ stats.closed }}</span>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

@@ -1,0 +1,84 @@
+<div class="layout-wrapper">
+  
+  <nav class="sidebar" [class.sidebar-collapsed]="!isSidebarOpen">
+    <div class="sidebar-brand">
+      <img src="/header/logo1.png" alt="SDC Logo" class="brand-icon">
+      <span class="brand-name">Admin Panel</span>
+      <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <span class="toggle-icon">{{isSidebarOpen ? '◀' : '▶'}}</span>
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">
+          <span class="icon">🏠</span>
+          <span class="link-text">Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/pending-approvals" routerLinkActive="active">
+          <span class="icon">👥</span>
+          <span class="link-text">Pending Approvals</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/users" routerLinkActive="active">
+          <span class="icon">👤</span>
+          <span class="link-text">All Users</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/tickets" routerLinkActive="active">
+          <span class="icon">🎫</span>
+          <span class="link-text">All Tickets</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/ticket-categories" routerLinkActive="active">
+          <span class="icon">🗂️</span>
+          <span class="link-text">Ticket Categories</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/departments" routerLinkActive="active">
+          <span class="icon">🏢</span>
+          <span class="link-text">Departments</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/admin/profile" routerLinkActive="active">
+          <span class="icon">⚙️</span>
+          <span class="link-text">Profile Settings</span>
+        </a>
+      </li>
+      
+      <li class="mt-auto">
+        <a (click)="onLogout()" class="logout-link">
+          <span class="icon">🚪</span>
+          <span class="link-text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="main-container">
+    
+    <app-header 
+      [title]="'Admin Console'" 
+      (toggleSidebar)="toggleSidebar()">
+    </app-header>
+
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+
+  </main>
+</div>

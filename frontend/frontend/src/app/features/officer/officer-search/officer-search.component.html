@@ -1,0 +1,76 @@
+<div class="audit-container">
+  
+  <div class="header-section">
+    <div>
+      <h2>Audit Registry</h2>
+      <p>Search by ID, Title, Status, or Domain Tag.</p>
+    </div>
+    
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Search tickets..." 
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+      >
+      <span class="search-hint">Typing searches automatically...</span>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Priority</th> <th>Assigned Domain</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (ticket of tickets; track ticket.id) {
+          <tr>
+            <td><span class="id-badge">#{{ ticket.id }}</span></td>
+            
+            <td>
+              <div class="title-text">{{ ticket.title }}</div>
+              <small>{{ ticket.created_at | date:'medium' }}</small>
+            </td>
+            
+            <td>
+              <span class="priority-badge" [class]="ticket.priority">
+                {{ ticket.priority }}
+              </span>
+            </td>
+            
+            <td>
+            <span class="badge" 
+              [class.assigned]="ticket.domain" 
+              [class.unassigned]="!ticket.domain">{{ ticket.domain ? getDomainName(ticket.domain) : 'Unassigned' }}
+            </span>
+          </td>
+
+            <td>
+              <span class="status-badge" [class]="ticket.status.toLowerCase()">
+                {{ ticket.status.replace('_', ' ') }}
+              </span>
+            </td>
+
+            <td>
+              <a [routerLink]="['/officer/ticket', ticket.id]" class="btn-audit">
+                👁️ Audit Log
+              </a>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="empty-state"> No records found.
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>

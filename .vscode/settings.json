@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Set-Location \"c:\\\\Users\\\\banke\\\\Desktop\\\\Modified\\\\backend\\\\backend\"; C:/Users/banke/Desktop/Modified/backend/backend/\\.venv/Scripts/python\\.exe manage\\.py runserver$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location \"c:\\\\Users\\\\banke\\\\Desktop\\\\Modified\\\\frontend\\\\frontend\"; npm install; npm run start$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

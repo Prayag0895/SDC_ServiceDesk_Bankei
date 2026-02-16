@@ -1,0 +1,78 @@
+<div class="dashboard-container">
+  <div class="page-header">
+    <h1>Admin Dashboard</h1>
+    <p>System Overview & Management</p>
+  </div>
+
+  <div class="stats-grid">
+    <!-- Total Users -->
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <div class="stat-label">Total Users</div>
+        <div class="stat-value">{{ stats.totalUsers }}</div>
+      </div>
+    </div>
+
+    <!-- Pending Approvals -->
+    <div class="stat-card highlight">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-content">
+        <div class="stat-label">Pending Approvals</div>
+        <div class="stat-value">{{ stats.pendingApprovals }}</div>
+      </div>
+    </div>
+
+    <!-- Total Tickets -->
+    <div class="stat-card">
+      <div class="stat-icon">🎫</div>
+      <div class="stat-content">
+        <div class="stat-label">Total Tickets</div>
+        <div class="stat-value">{{ stats.totalTickets }}</div>
+      </div>
+    </div>
+
+    <!-- Open Tickets -->
+    <div class="stat-card">
+      <div class="stat-icon">📂</div>
+      <div class="stat-content">
+        <div class="stat-label">Open Tickets</div>
+        <div class="stat-value">{{ stats.openTickets }}</div>
+      </div>
+    </div>
+
+    <!-- Closed Tickets -->
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <div class="stat-label">Closed Tickets</div>
+        <div class="stat-value">{{ stats.closedTickets }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading admin stats...</div>
+  <div *ngIf="errorMessage" class="loading-state error">{{ errorMessage }}</div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+      <a routerLink="/admin/pending-approvals" class="action-btn primary">
+        <span class="btn-icon">👥</span>
+        <span>Review Pending Users</span>
+      </a>
+      <a routerLink="/admin/users" class="action-btn">
+        <span class="btn-icon">👤</span>
+        <span>Manage All Users</span>
+      </a>
+      <a routerLink="/admin/tickets" class="action-btn">
+        <span class="btn-icon">🎫</span>
+        <span>View All Tickets</span>
+      </a>
+      <a routerLink="/admin/departments" class="action-btn">
+        <span class="btn-icon">🏢</span>
+        <span>Manage Departments</span>
+      </a>
+    </div>
+  </div>
+</div>

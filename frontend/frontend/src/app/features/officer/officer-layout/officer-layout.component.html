@@ -1,0 +1,49 @@
+<div class="layout-wrapper">
+  
+  <nav class="sidebar" [class.sidebar-collapsed]="!isSidebarOpen">
+    <div class="sidebar-brand">
+      <img src="/header/logo1.png" alt="SDC Logo" class="brand-icon">
+      <span class="brand-name">SDC Desk</span>
+      <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <span class="toggle-icon">{{isSidebarOpen ? '◀' : '▶'}}</span>
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/officer/dashboard" routerLinkActive="active">
+          <span class="icon">📊</span>
+          <span class="link-text">System Overview</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/officer/search" routerLinkActive="active">
+          <span class="icon">🔎</span>
+          <span class="link-text">Audit Registry</span>
+        </a>
+      </li>
+      
+      <li class="mt-auto">
+        <a (click)="onLogout()" style="cursor: pointer;"> 
+          <span class="icon">🚪</span>
+          <span class="link-text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="main-container">
+    
+    <app-header 
+      [title]="'Officer Console'" 
+      (toggleSidebar)="toggleSidebar()">
+    </app-header>
+
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+
+  </main>
+</div>

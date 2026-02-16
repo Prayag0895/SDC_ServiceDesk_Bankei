@@ -1,0 +1,50 @@
+.admin-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: var(--text-2xl);
+  color: var(--ink-900);
+  margin: 0 0 0.5rem 0;
+}
+
+.page-header p {
+  color: var(--ink-600);
+  margin: 0;
+}
+
+.loading-state,
+.error-state,
+.empty-state {
+  padding: 1rem;
+  color: var(--ink-600);
+}
+
+.error-state {
+  color: #b91c1c;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}

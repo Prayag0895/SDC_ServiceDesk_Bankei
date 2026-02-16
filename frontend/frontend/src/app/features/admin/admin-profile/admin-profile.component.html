@@ -1,0 +1,122 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div>
+      <h1>Admin Profile Settings</h1>
+      <p>Manage secondary admin accounts, reset passwords, and remove admins.</p>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="success-state" (click)="clearMessages()">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-state" (click)="clearMessages()">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading secondary admins...</div>
+
+  <div *ngIf="!isLoading" class="admin-section">
+    <div class="section-header">
+      <h2>Secondary Admin Accounts</h2>
+      <button class="btn primary" (click)="openCreateModal()">Add New Admin</button>
+    </div>
+
+    <div *ngIf="secondaryAdmins.length > 0; else noAdmins" class="admins-list">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of secondaryAdmins">
+            <td><strong>{{ admin.username }}</strong></td>
+            <td>{{ admin.email }}</td>
+            <td>{{ admin.date_joined | date : 'MMM dd, yyyy' }}</td>
+            <td class="actions">
+              <button class="btn secondary" (click)="openResetPasswordModal(admin)" title="Reset password">
+                Reset Password
+              </button>
+              <button class="btn danger" (click)="deleteSecondaryAdmin(admin)" title="Delete admin">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noAdmins>
+      <div class="empty-state">
+        No secondary admins yet. Click "Add New Admin" to create one.
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Create Admin Modal -->
+<div class="modal-backdrop" *ngIf="isCreateModalOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Create New Secondary Admin</h2>
+      <button class="icon-btn" (click)="closeCreateModal()" aria-label="Close">✕</button>
+    </div>
+    <form [formGroup]="createAdminForm" (ngSubmit)="createSecondaryAdmin()" class="modal-body">
+      <label>
+        Username
+        <input type="text" formControlName="username" placeholder="Enter username" />
+        <small class="error" *ngIf="createAdminForm.get('username')?.invalid && createAdminForm.get('username')?.touched">
+          Username is required and must be at least 3 characters.
+        </small>
+      </label>
+      <label>
+        Email
+        <input type="email" formControlName="email" placeholder="Enter email address" />
+        <small class="error" *ngIf="createAdminForm.get('email')?.invalid && createAdminForm.get('email')?.touched">
+          Valid email is required.
+        </small>
+      </label>
+      <label>
+        Password
+        <input type="password" formControlName="password" placeholder="Enter password (min 6 characters)" />
+        <small class="error" *ngIf="createAdminForm.get('password')?.invalid && createAdminForm.get('password')?.touched">
+          Password is required and must be at least 6 characters.
+        </small>
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeCreateModal()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="createAdminForm.invalid || isSaving">
+          {{ isSaving ? 'Creating...' : 'Create Admin' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Reset Password Modal -->
+<div class="modal-backdrop" *ngIf="isResetPasswordModalOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Reset Password for {{ selectedAdminName }}</h2>
+      <button class="icon-btn" (click)="closeResetPasswordModal()" aria-label="Close">✕</button>
+    </div>
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="resetAdminPassword()" class="modal-body">
+      <label>
+        New Password
+        <input type="password" formControlName="password" placeholder="Enter new password (min 6 characters)" />
+        <small class="error" *ngIf="resetPasswordForm.get('password')?.invalid && resetPasswordForm.get('password')?.touched">
+          Password is required and must be at least 6 characters.
+        </small>
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeResetPasswordModal()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="resetPasswordForm.invalid || isSaving">
+          {{ isSaving ? 'Resetting...' : 'Reset Password' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

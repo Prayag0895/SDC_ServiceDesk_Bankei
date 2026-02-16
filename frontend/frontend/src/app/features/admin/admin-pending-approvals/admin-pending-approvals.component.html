@@ -1,0 +1,41 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>Pending Approvals</h1>
+    <p>Review and approve new user accounts.</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading pending users...</div>
+  <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading" class="card">
+    <table class="data-table" *ngIf="pendingUsers.length > 0; else emptyState">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Department</th>
+          <th>Domain</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of pendingUsers">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role_display || user.role }}</td>
+          <td>{{ user.department_display || '-' }}</td>
+          <td>{{ user.domain_display || '-' }}</td>
+          <td class="actions">
+            <button class="btn primary" (click)="approveUser(user)">Approve</button>
+            <button class="btn danger" (click)="rejectUser(user)">Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyState>
+      <div class="empty-state">No pending users right now.</div>
+    </ng-template>
+  </div>
+</div>

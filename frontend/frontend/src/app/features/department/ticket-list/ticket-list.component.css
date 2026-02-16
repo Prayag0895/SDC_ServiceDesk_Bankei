@@ -1,0 +1,145 @@
+/* Container */
+.list-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h2 {
+  color: var(--ink-900);
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-family: var(--font-display);
+}
+
+.header p {
+  color: var(--ink-500);
+}
+
+/* Loading Spinner Text */
+.loading-spinner {
+  text-align: center;
+  padding: 2rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Table Card */
+.table-responsive {
+  background: var(--bg-surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden; /* Ensures rounded corners work on the table */
+  border: 1px solid var(--border);
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.ticket-table th {
+  background-color: rgba(11, 28, 44, 0.03);
+  color: var(--ink-500);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Table Body */
+.ticket-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(11, 28, 44, 0.08);
+  color: var(--ink-700);
+  vertical-align: middle;
+}
+
+/* Row Hover Effect */
+.ticket-table tbody tr:hover {
+  background-color: rgba(112, 119, 132, 0.05);
+}
+
+.ticket-title {
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--ink-500);
+  font-style: italic;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px; /* Pill shape */
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.status-pending { 
+  background-color: rgba(249, 115, 22, 0.16);
+  color: #92400e;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.status-approved { 
+  background-color: rgba(16, 185, 129, 0.18);
+  color: #0f766e;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-rejected { 
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-progress { 
+  background-color: rgba(59, 130, 246, 0.16);
+  color: #1d4ed8;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-completed { 
+  background-color: rgba(14, 116, 144, 0.14);
+  color: #0e7490;
+  border: 1px solid rgba(14, 116, 144, 0.24);
+}
+.status-closed { 
+  background-color: rgba(11, 28, 44, 0.08);
+  color: var(--ink-700);
+  border: 1px solid rgba(11, 28, 44, 0.12);
+}
+
+/* Action Button */
+.btn-view {
+  padding: 6px 14px;
+  background-color: #fffdf8;
+  border: 1px solid var(--border);
+  color: var(--ink-700);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-view:hover {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}

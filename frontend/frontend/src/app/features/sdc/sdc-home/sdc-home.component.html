@@ -1,0 +1,50 @@
+<div class="home-container">
+  
+  <div class="welcome-banner">
+    <div>
+      <h1>Welcome, SDC Engineer!</h1>
+      <p>Here is an overview of technical tasks assigned by Project Manager.</p>
+    </div>
+    <div class="banner-decoration">🛠️</div>
+  </div>
+
+  @if (!isLoading && stats) {
+    <div class="stats-grid">
+      
+      <div class="stat-card blue">
+        <div class="icon-wrapper">📂</div>
+        <div class="stat-info">
+          <span class="stat-label">Total Assigned</span>
+          <span class="stat-value">{{ stats.total_tickets || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card orange">
+        <div class="icon-wrapper">📥</div>
+        <div class="stat-info">
+          <span class="stat-label">Tasks To Do</span>
+          <span class="stat-value">{{ stats.approved || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card purple">
+        <div class="icon-wrapper">⚙️</div>
+        <div class="stat-info">
+          <span class="stat-label">In Progress</span>
+          <span class="stat-value">{{ stats.in_progress || 0 }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card green">
+        <div class="icon-wrapper">✅</div>
+        <div class="stat-info">
+          <span class="stat-label">Completed</span>
+          <span class="stat-value">
+            {{ (stats.completed || 0) + (stats.closed || 0) }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

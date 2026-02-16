@@ -1,0 +1,138 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div>
+      <h1>Ticket Categories</h1>
+      <p>Manage ticket categories and request types for the New Ticket form.</p>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading categories...</div>
+  <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+  <div class="grid" *ngIf="!isLoading">
+    <section class="card">
+      <div class="card-header">
+        <div class="header-left">
+          <h2>Ticket Types</h2>
+          <button class="btn sort-toggle" 
+                  [class.desc]="typeSortBy === 'id-desc'"
+                  (click)="toggleTypeSort()" 
+                  title="Toggle sort order">
+            {{ typeSortBy === 'id-asc' ? '↑ ID (Low to High)' : '↓ ID (High to Low)' }}
+          </button>
+        </div>
+        <button class="btn primary" (click)="openTypeCreate()">New Type</button>
+      </div>
+      <table class="data-table" *ngIf="ticketTypes.length > 0; else emptyTypes">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let type of ticketTypes">
+            <td>{{ type.id }}</td>
+            <td>{{ type.name }}</td>
+            <td class="actions">
+              <button class="btn" (click)="openTypeEdit(type)">Edit</button>
+              <button class="btn danger" (click)="deleteType(type)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #emptyTypes>
+        <div class="empty-state">No ticket types found.</div>
+      </ng-template>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div class="header-left">
+          <h2>Request Types</h2>
+          <button class="btn sort-toggle" 
+                  [class.desc]="requestSortBy === 'id-desc'"
+                  (click)="toggleRequestSort()" 
+                  title="Toggle sort order">
+            {{ requestSortBy === 'id-asc' ? '↑ ID (Low to High)' : '↓ ID (High to Low)' }}
+          </button>
+        </div>
+        <button class="btn primary" (click)="openRequestCreate()">New Request</button>
+      </div>
+      <table class="data-table" *ngIf="requestTypes.length > 0; else emptyRequests">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Ticket Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let req of requestTypes">
+            <td>{{ req.id }}</td>
+            <td>{{ req.name }}</td>
+            <td>{{ getTypeName(req.ticket_type) }}</td>
+            <td class="actions">
+              <button class="btn" (click)="openRequestEdit(req)">Edit</button>
+              <button class="btn danger" (click)="deleteRequest(req)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #emptyRequests>
+        <div class="empty-state">No request types found.</div>
+      </ng-template>
+    </section>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isTypeModalOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ isEditingType ? 'Edit Ticket Type' : 'New Ticket Type' }}</h2>
+      <button class="icon-btn" (click)="closeTypeModal()" aria-label="Close">✕</button>
+    </div>
+    <form [formGroup]="typeForm" (ngSubmit)="saveType()" class="modal-body">
+      <label>
+        Type Name
+        <input type="text" formControlName="name" placeholder="e.g. Network" />
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeTypeModal()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="typeForm.invalid || isSaving">
+          {{ isSaving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isRequestModalOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ isEditingRequest ? 'Edit Request Type' : 'New Request Type' }}</h2>
+      <button class="icon-btn" (click)="closeRequestModal()" aria-label="Close">✕</button>
+    </div>
+    <form [formGroup]="requestForm" (ngSubmit)="saveRequest()" class="modal-body">
+      <label>
+        Request Name
+        <input type="text" formControlName="name" placeholder="e.g. VPN Setup" />
+      </label>
+      <label>
+        Ticket Type
+        <select formControlName="ticket_type">
+          <option [ngValue]="null">Select type</option>
+          <option *ngFor="let type of ticketTypes" [ngValue]="type.id">{{ type.name }}</option>
+        </select>
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeRequestModal()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="requestForm.invalid || isSaving">
+          {{ isSaving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

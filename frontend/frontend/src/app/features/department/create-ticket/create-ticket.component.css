@@ -1,0 +1,263 @@
+/* =========================
+   1. VARIABLES & CONTAINER
+   ========================= */
+:host {
+  --primary-color: var(--primary);
+  --primary-hover: var(--primary-strong);
+  --text-main: var(--ink-900);
+  --text-secondary: var(--ink-500);
+  --border-color: var(--border);
+  --bg-card: var(--bg-surface);
+  --bg-input: #ffffff;
+  --danger-color: #ef4444;
+  --focus-ring: rgba(15, 118, 110, 0.2);
+}
+
+.create-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-strong);
+  font-family: var(--font-sans);
+  border: 1px solid var(--border);
+}
+
+/* =========================
+   2. HEADER
+   ========================= */
+.header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* =========================
+   3. FORM LAYOUT
+   ========================= */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Row for side-by-side inputs */
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group.half {
+  flex: 1;
+  min-width: 0; /* Prevents overflow in flex items */
+  margin-bottom: 0; /* Let row handle spacing */
+}
+
+/* =========================
+   4. INPUTS & LABELS
+   ========================= */
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-700);
+  margin-bottom: 0.5rem;
+}
+
+.req {
+  color: var(--danger-color);
+  margin-left: 2px;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  box-sizing: border-box; /* Important for width: 100% */
+}
+
+/* Placeholder Styling */
+::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+/* Interactive States */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba(11, 28, 44, 0.35);
+}
+
+/* Disabled State */
+select:disabled,
+input:disabled {
+  background-color: #f8fafc;
+  color: var(--ink-500);
+  cursor: not-allowed;
+  border-color: rgba(11, 28, 44, 0.08);
+}
+
+/* Helper Text */
+.hint {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Textarea specific */
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* =========================
+   5. FILE UPLOAD
+   ========================= */
+.file-upload-wrapper {
+  background-color: rgba(15, 118, 110, 0.06);
+  border: 2px dashed rgba(15, 118, 110, 0.3);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.file-upload-wrapper:hover {
+  border-color: var(--primary-color);
+  background-color: rgba(249, 115, 22, 0.08);
+}
+
+input[type="file"] {
+  display: block;
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+/* Customizing the native file button (Chrome/Edge/Safari) */
+input[type="file"]::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: white;
+  border: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #fff6eb;
+}
+
+.file-upload-wrapper small {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--ink-500);
+  font-size: 0.8rem;
+}
+
+/* =========================
+   6. ACTIONS
+   ========================= */
+.form-actions {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: flex-end; /* Right align button */
+}
+
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 18px rgba(15, 118, 110, 0.25);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 20px rgba(15, 118, 110, 0.3);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* =========================
+   7. RESPONSIVE DESIGN
+   ========================= */
+@media (max-width: 768px) {
+  .create-container {
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 12px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0; /* Let form-group margin handle it */
+  }
+
+  .form-group.half {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+}

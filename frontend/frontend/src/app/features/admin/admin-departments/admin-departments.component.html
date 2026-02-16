@@ -1,0 +1,61 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>Departments</h1>
+    <p>Registered departments in the system.</p>
+    <button class="btn primary" (click)="openCreate()">New Department</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading departments...</div>
+  <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading" class="card">
+    <table class="data-table" *ngIf="departments.length > 0; else emptyState">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dept of departments">
+          <td>{{ dept.id }}</td>
+          <td>{{ dept.name }}</td>
+          <td class="actions">
+            <button class="btn" (click)="openEdit(dept)">Edit</button>
+            <button class="btn danger" (click)="deleteDepartment(dept)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyState>
+      <div class="empty-state">No departments found.</div>
+    </ng-template>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isModalOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ isEditMode ? 'Edit Department' : 'New Department' }}</h2>
+      <button class="icon-btn" (click)="closeModal()" aria-label="Close">✕</button>
+    </div>
+
+    <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()" class="modal-body">
+      <label>
+        Department Name
+        <input type="text" formControlName="name" placeholder="Enter department name">
+      </label>
+
+      <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="departmentForm.invalid || isSaving">
+          {{ isSaving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

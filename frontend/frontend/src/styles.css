@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  
+  /* Typography Scale */
+  --text-xs: 0.75rem;     /* 12px - small labels */
+  --text-sm: 0.875rem;    /* 14px - body small, sidebar */
+  --text-base: 1rem;      /* 16px - body text, inputs */
+  --text-lg: 1.125rem;    /* 18px - emphasized text */
+  --text-xl: 1.25rem;     /* 20px - subheadings */
+  --text-2xl: 1.5rem;     /* 24px - page titles */
+  --text-3xl: 1.875rem;   /* 30px - main headings */
+  --text-4xl: 2.25rem;    /* 36px - hero text */
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  --bg-base: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-sidebar: #f1f2f4;
+  --ink-900: #2d3748;
+  --ink-700: #4a5568;
+  --ink-500: #718096;
+  --ink-300: #a0aec0;
+  --primary: #3d4451;
+  --primary-strong: #2d3748;
+  --accent: #707784;
+  --accent-soft: #9ca3af;
+  --border: rgba(45, 55, 72, 0.08);
+  --shadow-soft: 0 6px 20px rgba(45, 55, 72, 0.04);
+  --shadow-strong: 0 12px 32px rgba(45, 55, 72, 0.08);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink-900);
+  background: #ffffff;
+  line-height: 1.55;
+  font-size: var(--text-base);
+  letter-spacing: -0.011em;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Typography Standards */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-3xl); font-weight: var(--font-bold); }
+h2 { font-size: var(--text-2xl); font-weight: var(--font-semibold); }
+h3 { font-size: var(--text-xl); font-weight: var(--font-semibold); }
+h4 { font-size: var(--text-lg); font-weight: var(--font-medium); }
+h5 { font-size: var(--text-base); font-weight: var(--font-medium); }
+h6 { font-size: var(--text-sm); font-weight: var(--font-medium); }
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+strong, b {
+  font-weight: var(--font-semibold);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

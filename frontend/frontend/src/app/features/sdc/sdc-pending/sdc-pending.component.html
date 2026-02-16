@@ -1,0 +1,67 @@
+<div class="inbox-container">
+  
+  <div class="header">
+    <h2>Team Inbox</h2>
+    <p>Tickets assigned to your domain awaiting action.</p>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-spinner">
+      Loading tasks...
+    </div>
+  }
+
+  @if (!isLoading) {
+    <div class="table-responsive">
+      <table class="ticket-table">
+        <thead>
+          <tr>
+            <th style="width: 80px;">ID</th>
+            <th style="width: 50%;">Issue Details</th>
+            <th>Date Assigned</th>
+            <th style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ticket of inboxTickets; track ticket.id) {
+            <tr>
+              <td>
+                <span class="id-badge">#{{ ticket.id }}</span>
+              </td>
+              
+              <td>
+                <div class="ticket-title">{{ ticket.title }}</div>
+                <div class="ticket-desc">{{ ticket.description | slice:0:80 }}...</div>
+                
+                <div class="ticket-meta">
+                  <span class="user-badge">
+                    👤 {{ ticket.created_by_name || 'User ' + ticket.created_by }}
+                  </span>
+                </div>
+              </td>
+              
+              <td>
+                <div class="ticket-date">
+                  📅 {{ ticket.created_at | date:'mediumDate' }}
+                </div>
+              </td>
+              
+              <td style="text-align: right;">
+                <a [routerLink]="['/sdc/work', ticket.id]" class="btn-open">
+                  <span>Open Workspace</span>
+                  <span class="arrow">→</span>
+                </a>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" class="empty-state">
+                🎉 No new tickets pending for your team. Good job!
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

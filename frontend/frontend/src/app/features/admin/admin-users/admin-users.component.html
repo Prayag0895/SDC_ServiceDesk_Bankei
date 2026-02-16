@@ -1,0 +1,101 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>All Users</h1>
+    <p>Browse every account in the system.</p>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">Loading users...</div>
+  <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading" class="card">
+    <table class="data-table" *ngIf="users.length > 0; else emptyState">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Phone</th>
+          <th>Approved</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role_display || user.role }}</td>
+          <td>{{ user.phone_number || '-' }}</td>
+          <td>{{ user.is_approved ? 'Yes' : 'No' }}</td>
+          <td class="actions">
+            <button class="btn" (click)="openEdit(user)">Edit</button>
+            <button class="btn danger" (click)="deleteUser(user)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyState>
+      <div class="empty-state">No users found.</div>
+    </ng-template>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isEditOpen">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Edit User</h2>
+      <button class="icon-btn" (click)="closeEdit()" aria-label="Close">✕</button>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="saveUser()" class="modal-body">
+      <div class="form-grid">
+        <label>
+          Username
+          <input type="text" formControlName="username">
+        </label>
+        <label>
+          Email
+          <input type="email" formControlName="email">
+        </label>
+        <label>
+          Role
+          <select formControlName="role">
+            <option value="">Select role</option>
+            <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+          </select>
+        </label>
+        <label>
+          Phone
+          <input type="text" formControlName="phone_number">
+        </label>
+        <label>
+          Department
+          <select formControlName="department_name">
+            <option [ngValue]="null">None</option>
+            <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.name }}</option>
+          </select>
+        </label>
+        <label>
+          Domain
+          <select formControlName="domain">
+            <option [ngValue]="null">None</option>
+            <option *ngFor="let domain of domains" [ngValue]="domain.id">{{ domain.display }}</option>
+          </select>
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" formControlName="is_approved">
+          Approved
+        </label>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-state">{{ errorMessage }}</div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" (click)="closeEdit()">Cancel</button>
+        <button type="submit" class="btn primary" [disabled]="editForm.invalid || isSaving">
+          {{ isSaving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

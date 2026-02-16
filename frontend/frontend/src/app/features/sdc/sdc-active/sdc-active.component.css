@@ -1,0 +1,287 @@
+/* --- Layout --- */
+.active-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  font-family: var(--font-sans);
+}
+
+/* --- Header --- */
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h2 {
+  color: var(--ink-900);
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.header p {
+  color: var(--ink-500);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* --- Loading --- */
+.loading-spinner {
+  text-align: center;
+  padding: 3rem;
+  color: var(--ink-500);
+  font-size: 1.1rem;
+}
+
+/* --- Table Card --- */
+.table-responsive {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.ticket-table th {
+  background-color: rgba(11, 28, 44, 0.04);
+  color: var(--ink-500);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1.2rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.ticket-table td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid rgba(11, 28, 44, 0.08);
+  vertical-align: middle;
+  color: var(--ink-700);
+}
+
+.ticket-table tr:hover {
+  background-color: rgba(15, 118, 110, 0.05);
+}
+
+/* --- Content Styles --- */
+.id-badge {
+  background-color: rgba(11, 28, 44, 0.08);
+  color: var(--ink-700);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ticket-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-900);
+  margin-bottom: 4px;
+}
+
+.ticket-desc {
+  font-size: 0.9rem;
+  color: var(--ink-500);
+  margin-bottom: 8px;
+}
+
+.date-badge {
+  font-size: 0.8rem;
+  color: var(--ink-500);
+}
+
+/* --- Status Badge with Pulse --- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-progress {
+  background-color: rgba(249, 115, 22, 0.16);
+  color: #92400e;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+/* Animated Dot */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #92400e;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(133, 100, 4, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(133, 100, 4, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(133, 100, 4, 0); }
+}
+
+/* --- Actions --- */
+.action-cell {
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Chat Button */
+.btn-chat {
+  background-color: rgba(11, 28, 44, 0.06);
+  color: var(--ink-700);
+  border: 1px solid rgba(11, 28, 44, 0.12);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-chat:hover {
+  background-color: rgba(11, 28, 44, 0.12);
+  color: var(--ink-900);
+}
+
+/* Complete Button */
+.btn-complete {
+  background-color: rgba(16, 185, 129, 0.18);
+  color: #0f766e;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-complete:hover {
+  background-color: rgba(16, 185, 129, 0.28);
+  transform: translateY(-1px);
+}
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--ink-500);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+/* Title Link Styling */
+.ticket-link {
+  text-decoration: none;
+  display: block;
+}
+
+.ticket-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.ticket-link:hover .ticket-title {
+  color: var(--primary);
+}
+
+/* Workspace Button */
+.btn-workspace {
+  text-decoration: none;
+  background-color: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.btn-workspace:hover {
+  background-color: var(--primary-strong);
+}
+
+/* ===============================
+   PRIORITY BADGE (ADDED)
+   =============================== */
+
+.priority-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* Priority colors */
+.priority-badge.p1 {
+  background-color: #fbbf24;
+  color: #fff;
+}
+
+.priority-badge.p2 {
+  background-color: #fa8c16;
+  color: #fff;
+}
+
+.priority-badge.p3 {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.priority-badge.p4 {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+/* ===============================
+   OVERDUE STATE
+   =============================== */
+
+.priority-badge.overdue {
+  background-color: #fa8c16;
+  color: #856404;
+  border: 1px solid #43431f;
+  animation: overdueBlink 1.2s infinite;
+}
+
+/* Blink animation */
+@keyframes overdueBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 1;
+  }
+}

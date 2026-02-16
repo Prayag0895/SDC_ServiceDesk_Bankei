@@ -1,0 +1,52 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="header">
+      <img src="/header/logo1.png" alt="Sikkim Logo" class="logo">
+      <h2>State Data Centre</h2>
+      <p>Service Desk Portal</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
+      <div class="form-group">
+        <label for="identifier">Username / Email / Phone</label>
+        <input 
+          type="text"
+          id="identifier"
+          [(ngModel)]="credentials.username"
+          name="identifier"
+          [ngModelOptions]="{ standalone: true }"
+          required
+          placeholder="Enter username, email, or phone"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password"
+          id="password"
+          [(ngModel)]="credentials.password"
+          name="password"
+          [ngModelOptions]="{ standalone: true }"
+          required
+          placeholder="••••••••"
+        >
+      </div>
+
+      <div *ngIf="errorMessage" class="alert error">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading">Verifying...</span>
+      </button>
+
+      <div class="register-link">
+        <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+      </div>
+
+    </form>
+  </div>
+</div>
