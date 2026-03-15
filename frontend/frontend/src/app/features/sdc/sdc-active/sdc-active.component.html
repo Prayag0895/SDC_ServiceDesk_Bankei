@@ -45,7 +45,7 @@
 
                 <div class="ticket-meta">
                   <span class="date-badge">
-                    📅 Started: {{ ticket.created_at | date:'shortDate' }}
+                    <span class="app-icon">calendar_month</span> Started: {{ ticket.created_at | date:'shortDate' }}
                   </span>
                 </div>
               </td>
@@ -60,7 +60,7 @@
                   [class.p4]="ticket.priority === 'P4'"
                   [class.overdue]="isOverdue(ticket)"
                 >
-                  {{ isOverdue(ticket) ? '⚠ OVERDUE' : ticket.priority }}
+                  {{ isOverdue(ticket) ? 'OVERDUE' : ticket.priority }}
                 </span>
               </td>
 
@@ -76,7 +76,7 @@
                     [routerLink]="['/sdc/work', ticket.id]"
                     class="btn-workspace"
                   >
-                    → Open Workspace
+                    <span class="app-icon">arrow_forward</span> Open Workspace
                   </a>
                 </div>
               </td>
@@ -84,7 +84,7 @@
           } @empty {
             <tr>
               <td colspan="5" class="empty-state">
-                🚀 No active tasks right now. Go to "New Requests" to start a job!
+                <span class="app-icon">rocket_launch</span> No active tasks right now. Go to "New Requests" to start a job!
               </td>
             </tr>
           }

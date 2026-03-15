@@ -48,3 +48,18 @@
   padding: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
+
+.btn-view {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--ink-200);
+  background: var(--ink-50);
+  color: var(--ink-900);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-view:hover {
+  background: var(--ink-100);
+}

@@ -18,7 +18,7 @@
             <th>Description</th>
             <th>Date Created</th>
 
-            <!-- ✅ NEW -->
+            <!-- SLA column -->
             <th>Time</th>
 
             <th>Status</th>
@@ -40,7 +40,7 @@
                 {{ ticket.created_at | date:'mediumDate' }}
               </td>
 
-              <!-- ✅ SLA RESULT -->
+              <!-- SLA result -->
               <td>
                 <span
                   [class.sla-overdue]="isOverdue(ticket)"
@@ -61,7 +61,8 @@
                   [routerLink]="['/sdc/ticket', ticket.id]"
                   class="btn-view"
                 >
-                  👁️ Details
+                  <span class="app-icon">visibility</span>
+                  <span class="btn-label">Details</span>
                 </a>
               </td>
             </tr>

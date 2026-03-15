@@ -5,7 +5,7 @@
       <h1>Officer Console Overview</h1>
       <p>Real-time status monitoring of all departmental requests.</p>
     </div>
-    <div class="banner-decoration">📊</div>
+    <div class="banner-decoration app-icon">monitoring</div>
   </div>
 
   @if (isLoading) {
@@ -19,7 +19,7 @@
     <div class="stats-grid">
       
       <div class="stat-card blue">
-        <div class="icon-wrapper">📂</div>
+        <div class="icon-wrapper app-icon">folder_open</div>
         <div class="stat-info">
           <span class="stat-label">Total Tickets</span>
           <span class="stat-value">{{ stats.total_tickets }}</span>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="stat-card orange">
-        <div class="icon-wrapper">⏳</div>
+        <div class="icon-wrapper app-icon">hourglass_top</div>
         <div class="stat-info">
           <span class="stat-label">Pending Review</span>
           <span class="stat-value">{{ stats.pending }}</span>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="stat-card green">
-        <div class="icon-wrapper">✅</div>
+        <div class="icon-wrapper app-icon">task_alt</div>
         <div class="stat-info">
           <span class="stat-label">Approved</span>
           <span class="stat-value">{{ stats.approved }}</span>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="stat-card red">
-        <div class="icon-wrapper">🚫</div>
+        <div class="icon-wrapper app-icon">block</div>
         <div class="stat-info">
           <span class="stat-label">Rejected</span>
           <span class="stat-value">{{ stats.rejected }}</span>
@@ -51,7 +51,7 @@
       </div>
 
       <div class="stat-card purple">
-        <div class="icon-wrapper">⚙️</div>
+        <div class="icon-wrapper app-icon">settings</div>
         <div class="stat-info">
           <span class="stat-label">In Progress</span>
           <span class="stat-value">{{ stats.in_progress || 0 }}</span>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="stat-card teal">
-        <div class="icon-wrapper">🏁</div>
+        <div class="icon-wrapper app-icon">flag</div>
         <div class="stat-info">
           <span class="stat-label">Completed</span>
           <span class="stat-value">{{ stats.completed || 0 }}</span>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="stat-card grey">
-        <div class="icon-wrapper">🔒</div>
+        <div class="icon-wrapper app-icon">lock</div>
         <div class="stat-info">
           <span class="stat-label">Closed</span>
           <span class="stat-value">{{ stats.closed }}</span>

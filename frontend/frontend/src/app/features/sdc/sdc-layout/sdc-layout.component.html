@@ -5,41 +5,41 @@
       <img src="/header/logo1.png" alt="SDC Logo" class="brand-icon">
       <span class="brand-name">SDC Desk</span>
       <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
-        <span class="toggle-icon">{{isSidebarOpen ? '◀' : '▶'}}</span>
+        <span class="toggle-icon app-icon">{{ isSidebarOpen ? 'chevron_left' : 'chevron_right' }}</span>
       </button>
     </div>
     <ul class="nav-links">
       <li>
         <a routerLink="/sdc/home" routerLinkActive="active">
-          <span class="icon">🏠</span> 
+          <span class="icon app-icon">home</span>
            <span class="link-text">Overview</span>
         </a>
       </li>
       
       <li>
         <a routerLink="/sdc/pending" routerLinkActive="active">
-          <span class="icon">📥</span> 
+          <span class="icon app-icon">inbox</span>
            <span class="link-text">New Requests</span>
         </a>
       </li>
 
       <li>
         <a routerLink="/sdc/active" routerLinkActive="active">
-          <span class="icon">⚡</span> 
+          <span class="icon app-icon">bolt</span>
           <span class="link-text">Active Tasks</span>
         </a>
       </li>
 
       <li>
         <a routerLink="/sdc/history" routerLinkActive="active">
-          <span class="icon">📜</span> 
+          <span class="icon app-icon">history</span>
           <span class="link-text">Work History</span>
         </a>
       </li>
 
       <li class="mt-auto">
-      <a (click)="onLogout()" style="cursor: pointer;"> 
-        <span class="icon">🚪</span>
+      <a (click)="onLogout()" class="logout-link">
+        <span class="icon app-icon">logout</span>
         <span class="link-text">Logout</span>
       </a>
     </li>

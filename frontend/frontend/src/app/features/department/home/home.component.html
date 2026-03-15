@@ -5,7 +5,7 @@
       <h1>Welcome back, Department User!</h1>
       <p>Here is the status of your support requests for {{ currentDate | date:'fullDate' }}.</p>
     </div>
-    <div class="banner-decoration">🚀</div>
+    <div class="banner-decoration app-icon">rocket_launch</div>
   </div>
 
   @if (isLoading) {
@@ -19,7 +19,7 @@
     <div class="stats-grid">
       
       <div class="stat-card blue">
-        <div class="icon-wrapper">📂</div>
+        <div class="icon-wrapper app-icon">folder_open</div>
         <div class="stat-info">
           <span class="stat-label">Total Tickets</span>
           <span class="stat-value">{{ stats.total_tickets }}</span>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="stat-card orange">
-        <div class="icon-wrapper">⏳</div>
+        <div class="icon-wrapper app-icon">hourglass_top</div>
         <div class="stat-info">
           <span class="stat-label">Pending</span>
           <span class="stat-value">{{ stats.pending }}</span>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="stat-card green">
-        <div class="icon-wrapper">✅</div>
+        <div class="icon-wrapper app-icon">task_alt</div>
         <div class="stat-info">
           <span class="stat-label">Approved</span>
           <span class="stat-value">{{ stats.approved }}</span>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="stat-card red">
-        <div class="icon-wrapper">🚫</div>
+        <div class="icon-wrapper app-icon">block</div>
         <div class="stat-info">
           <span class="stat-label">Rejected</span>
           <span class="stat-value">{{ stats.rejected }}</span>

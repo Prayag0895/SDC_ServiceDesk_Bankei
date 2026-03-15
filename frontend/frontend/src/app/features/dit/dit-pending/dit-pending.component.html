@@ -7,7 +7,7 @@
 
   @if (isLoading) {
     <div class="loading-spinner">
-      <span class="spinner-icon">⏳</span> Loading pending tickets...
+      <span class="spinner-icon app-icon">hourglass_top</span> Loading pending tickets...
     </div>
   }
 
@@ -32,7 +32,7 @@
                 <div class="ticket-title">{{ ticket.title }}</div>
                 <div class="ticket-desc">{{ ticket.description | slice:0:60 }}{{ ticket.description.length > 60 ? '...' : '' }}</div>
                 <div class="ticket-date">
-                  📅 {{ ticket.created_at | date:'mediumDate' }}
+                  <span class="app-icon">calendar_month</span> {{ ticket.created_at | date:'mediumDate' }}
                 </div>
               </td>
               
@@ -51,14 +51,14 @@
               <td style="text-align: right;">
                 <a [routerLink]="['/dit/approve', ticket.id]" class="btn-review">
                   <span>Review</span>
-                  <span class="arrow">→</span>
+                  <span class="arrow app-icon">arrow_forward</span>
                 </a>
               </td>
             </tr>
           } @empty {
             <tr>
               <td colspan="5" class="empty-state">
-                🎉 No pending tickets! You are all caught up.
+                <span class="app-icon">celebration</span> No pending tickets! You are all caught up.
               </td>
             </tr>
           }

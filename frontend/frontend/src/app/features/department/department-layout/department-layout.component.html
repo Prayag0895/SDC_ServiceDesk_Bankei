@@ -5,31 +5,31 @@
       <img src="/header/logo1.png" alt="SDC Logo" class="brand-icon">
       <span class="brand-name">SDC Desk</span>
       <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
-        <span class="toggle-icon">{{isSidebarOpen ? '◀' : '▶'}}</span>
+        <span class="toggle-icon app-icon">{{ isSidebarOpen ? 'chevron_left' : 'chevron_right' }}</span>
       </button>
     </div>
     <ul class="nav-links">
       <li>
         <a routerLink="/department/home" routerLinkActive="active">
-          <span class="icon">🏠</span>
+          <span class="icon app-icon">home</span>
           <span class="link-text">Home</span>
         </a>
       </li>
       <li>
         <a routerLink="/department/my-tickets" routerLinkActive="active">
-          <span class="icon">📋</span>
+          <span class="icon app-icon">assignment</span>
           <span class="link-text">My Tickets</span>
         </a>
       </li>
       <li>
         <a routerLink="/department/create-ticket" routerLinkActive="active">
-          <span class="icon">➕</span>
+          <span class="icon app-icon">add_circle</span>
           <span class="link-text">New Ticket</span>
         </a>
       </li>
       <li class="mt-auto">
-        <a (click)="onLogout()" style="cursor: pointer;"> 
-          <span class="icon">🚪</span>
+        <a (click)="onLogout()" class="logout-link">
+          <span class="icon app-icon">logout</span>
           <span class="link-text">Logout</span>
         </a>
       </li>

@@ -6,6 +6,21 @@
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
+.btn-back {
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border: 1px solid #dbe2ea;
+  color: #1f2937;
+  border-radius: 8px;
+  padding: 0.45rem 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  background: #eef2f7;
+}
+
 /* --- Loading --- */
 .loading-state { text-align: center; padding: 4rem; color: #95a5a6; }
 .spinner {

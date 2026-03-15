@@ -35,28 +35,28 @@
                 
                 <div class="ticket-meta">
                   <span class="user-badge">
-                    👤 {{ ticket.created_by_name || 'User ' + ticket.created_by }}
+                    <span class="app-icon">person</span> {{ ticket.created_by_name || 'User ' + ticket.created_by }}
                   </span>
                 </div>
               </td>
               
               <td>
                 <div class="ticket-date">
-                  📅 {{ ticket.created_at | date:'mediumDate' }}
+                  <span class="app-icon">calendar_month</span> {{ ticket.created_at | date:'mediumDate' }}
                 </div>
               </td>
               
               <td style="text-align: right;">
                 <a [routerLink]="['/sdc/work', ticket.id]" class="btn-open">
                   <span>Open Workspace</span>
-                  <span class="arrow">→</span>
+                  <span class="arrow app-icon">arrow_forward</span>
                 </a>
               </td>
             </tr>
           } @empty {
             <tr>
               <td colspan="4" class="empty-state">
-                🎉 No new tickets pending for your team. Good job!
+                <span class="app-icon">celebration</span> No new tickets pending for your team. Good job!
               </td>
             </tr>
           }

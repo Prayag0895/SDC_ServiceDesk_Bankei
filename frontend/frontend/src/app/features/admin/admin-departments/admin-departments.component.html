@@ -39,7 +39,7 @@
   <div class="modal">
     <div class="modal-header">
       <h2>{{ isEditMode ? 'Edit Department' : 'New Department' }}</h2>
-      <button class="icon-btn" (click)="closeModal()" aria-label="Close">✕</button>
+      <button class="icon-btn" (click)="closeModal()" aria-label="Close"><span class="app-icon">close</span></button>
     </div>
 
     <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()" class="modal-body">

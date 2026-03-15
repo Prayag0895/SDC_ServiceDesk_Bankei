@@ -26,8 +26,23 @@
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 0.9rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  line-height: 1;
   transition: background 0.2s;
+}
+
+.btn-view .app-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-view .btn-label {
+  display: inline-block;
+  line-height: 1;
 }
 .btn-view:hover { background-color: var(--ink-900); }
 

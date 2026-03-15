@@ -2,13 +2,13 @@
   
   <div class="header">
     <div class="header-left">
-      <a routerLink="/dit/pending" class="back-link">← Back to List</a>
+      <a routerLink="/dit/pending" class="back-link"><span class="app-icon">arrow_back</span> Back to List</a>
       <h2>Review Ticket #{{ ticket?.id }}</h2>
     </div>
     
     <div class="header-right">
       @if (ticket) {
-        <a [routerLink]="['/dit/ticket', ticket.id]" class="btn-logs">📜 Audit Logs</a>
+        <a [routerLink]="['/dit/ticket', ticket.id]" class="btn-logs"><span class="app-icon">history</span> Audit Logs</a>
       }
     </div>
   </div>
@@ -34,7 +34,7 @@
                   {{ getTypeName(ticket.ticket_type) }} 
                   
                   <span *ngIf="ticket.request_type">
-                      → {{ getRequestName(ticket.request_type) }}
+                      -> {{ getRequestName(ticket.request_type) }}
                   </span>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="attachment-section">
               <label>Supporting Document</label>
               <div class="file-box">
-                <span class="file-icon">📄</span>
+                <span class="file-icon app-icon">description</span>
                 <a [href]="ticket.attachment" target="_blank" class="btn-download">View File</a>
               </div>
             </div>
@@ -102,10 +102,10 @@
           <div class="action-buttons">
             @if (ticket.status === 'PENDING') {
               <button class="btn-approve" (click)="approve()" [disabled]="isProcessing">
-                ✓ Approve & Forward
+                <span class="app-icon">task_alt</span> Approve & Forward
               </button>
               <button class="btn-reject" (click)="reject()" [disabled]="isProcessing">
-                ✕ Reject
+                <span class="app-icon">cancel</span> Reject
               </button>
             }
 
@@ -113,7 +113,7 @@
               <div class="close-alert">
                  <p><strong>Status: Completed</strong> by SDC.</p>
                  <button class="btn-close" (click)="closeTicket()" [disabled]="isProcessing">
-                    🔒 Verify & Close Ticket
+                    <span class="app-icon">lock</span> Verify & Close Ticket
                  </button>
               </div>
             }

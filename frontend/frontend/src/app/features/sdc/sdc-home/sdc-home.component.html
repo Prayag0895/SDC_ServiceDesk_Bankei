@@ -5,14 +5,14 @@
       <h1>Welcome, SDC Engineer!</h1>
       <p>Here is an overview of technical tasks assigned by Project Manager.</p>
     </div>
-    <div class="banner-decoration">🛠️</div>
+    <div class="banner-decoration app-icon">engineering</div>
   </div>
 
   @if (!isLoading && stats) {
     <div class="stats-grid">
       
       <div class="stat-card blue">
-        <div class="icon-wrapper">📂</div>
+        <div class="icon-wrapper app-icon">assignment</div>
         <div class="stat-info">
           <span class="stat-label">Total Assigned</span>
           <span class="stat-value">{{ stats.total_tickets || 0 }}</span>
@@ -20,7 +20,7 @@
       </div>
 
       <div class="stat-card orange">
-        <div class="icon-wrapper">📥</div>
+        <div class="icon-wrapper app-icon">move_to_inbox</div>
         <div class="stat-info">
           <span class="stat-label">Tasks To Do</span>
           <span class="stat-value">{{ stats.approved || 0 }}</span>
@@ -28,7 +28,7 @@
       </div>
 
       <div class="stat-card purple">
-        <div class="icon-wrapper">⚙️</div>
+        <div class="icon-wrapper app-icon">settings</div>
         <div class="stat-info">
           <span class="stat-label">In Progress</span>
           <span class="stat-value">{{ stats.in_progress || 0 }}</span>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="stat-card green">
-        <div class="icon-wrapper">✅</div>
+        <div class="icon-wrapper app-icon">task_alt</div>
         <div class="stat-info">
           <span class="stat-label">Completed</span>
           <span class="stat-value">

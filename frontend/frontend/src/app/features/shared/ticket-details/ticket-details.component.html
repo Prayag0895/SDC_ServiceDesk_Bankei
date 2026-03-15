@@ -1,4 +1,5 @@
 <div class="details-container">
+  <button class="btn-back" type="button" (click)="goBack()"><span class="app-icon">arrow_back</span> Back</button>
   
   @if (isLoading) {
     <div class="loading-state">
@@ -22,15 +23,15 @@
 
       <div class="meta-row">
         <div class="meta-item">
-          <span class="label">👤 Requester:</span>
+          <span class="label"><span class="app-icon">person</span> Requester:</span>
           <span class="value">{{ ticket.created_by_name }}</span>
         </div>
         <div class="meta-item">
-          <span class="label">📅 Created:</span>
+          <span class="label"><span class="app-icon">calendar_month</span> Created:</span>
           <span class="value">{{ ticket.created_at | date:'mediumDate' }}</span>
         </div>
         <div class="meta-item">
-          <span class="label">🏢 Domain:</span>
+          <span class="label"><span class="app-icon">apartment</span> Domain:</span>
           <span class="value">{{ ticket.domain ? getDomainName(ticket.domain) : 'Pending Assignment' }}</span>
         </div>
       </div>
@@ -47,7 +48,7 @@
             <div class="attachment-section">
               <label>Attachment</label>
               <div class="file-box">
-                <span class="icon">📎</span>
+                <span class="icon app-icon">attach_file</span>
                 <span class="filename">Attached Document</span>
                 <a [href]="ticket.attachment" target="_blank" class="btn-download">Download</a>
               </div>
@@ -56,7 +57,7 @@
 
           @if (ticket.pm_remarks) {
             <div class="pm-note">
-              <strong>📝 PM Remarks:</strong>
+              <strong><span class="app-icon">edit_note</span> PM Remarks:</strong>
               <p>{{ ticket.pm_remarks }}</p>
             </div>
           }
@@ -71,7 +72,7 @@
               class="tab-btn" 
               [class.active]="activeTab === 'logs'" 
               (click)="activeTab = 'logs'">
-              📜 Progress timestamp
+              <span class="app-icon">history</span> Progress timestamp
             </button>
             
             @if (currentUserRole !== 'DEPARTMENT') {
@@ -79,7 +80,7 @@
                 class="tab-btn" 
                 [class.active]="activeTab === 'comments'" 
                 (click)="activeTab = 'comments'">
-                💬 Internal Chat ({{ comments.length }})
+                <span class="app-icon">chat</span> Internal Chat ({{ comments.length }})
               </button>
             }
           </div>
@@ -108,7 +109,7 @@
                         <span class="action-badge">{{ log.action }}</span>
                         @if (log.old_status && log.new_status) {
                           <div class="status-change">
-                            {{ log.old_status }} ➝ <strong>{{ log.new_status }}</strong>
+                            {{ log.old_status }} -> <strong>{{ log.new_status }}</strong>
                           </div>
                         }
                       </td>
@@ -148,7 +149,7 @@
                   rows="2"
                 ></textarea>
                 <button (click)="postComment()" [disabled]="!newCommentText.trim()">
-                  Send ➤
+                  <span class="app-icon">send</span> Send
                 </button>
               </div>
 

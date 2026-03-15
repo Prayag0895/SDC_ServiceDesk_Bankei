@@ -18,7 +18,8 @@
                   [class.desc]="typeSortBy === 'id-desc'"
                   (click)="toggleTypeSort()" 
                   title="Toggle sort order">
-            {{ typeSortBy === 'id-asc' ? '↑ ID (Low to High)' : '↓ ID (High to Low)' }}
+            <span class="app-icon">{{ typeSortBy === 'id-asc' ? 'north' : 'south' }}</span>
+            {{ typeSortBy === 'id-asc' ? 'ID (Low to High)' : 'ID (High to Low)' }}
           </button>
         </div>
         <button class="btn primary" (click)="openTypeCreate()">New Type</button>
@@ -55,7 +56,8 @@
                   [class.desc]="requestSortBy === 'id-desc'"
                   (click)="toggleRequestSort()" 
                   title="Toggle sort order">
-            {{ requestSortBy === 'id-asc' ? '↑ ID (Low to High)' : '↓ ID (High to Low)' }}
+            <span class="app-icon">{{ requestSortBy === 'id-asc' ? 'north' : 'south' }}</span>
+            {{ requestSortBy === 'id-asc' ? 'ID (Low to High)' : 'ID (High to Low)' }}
           </button>
         </div>
         <button class="btn primary" (click)="openRequestCreate()">New Request</button>
@@ -92,7 +94,7 @@
   <div class="modal">
     <div class="modal-header">
       <h2>{{ isEditingType ? 'Edit Ticket Type' : 'New Ticket Type' }}</h2>
-      <button class="icon-btn" (click)="closeTypeModal()" aria-label="Close">✕</button>
+      <button class="icon-btn" (click)="closeTypeModal()" aria-label="Close"><span class="app-icon">close</span></button>
     </div>
     <form [formGroup]="typeForm" (ngSubmit)="saveType()" class="modal-body">
       <label>
@@ -113,7 +115,7 @@
   <div class="modal">
     <div class="modal-header">
       <h2>{{ isEditingRequest ? 'Edit Request Type' : 'New Request Type' }}</h2>
-      <button class="icon-btn" (click)="closeRequestModal()" aria-label="Close">✕</button>
+      <button class="icon-btn" (click)="closeRequestModal()" aria-label="Close"><span class="app-icon">close</span></button>
     </div>
     <form [formGroup]="requestForm" (ngSubmit)="saveRequest()" class="modal-body">
       <label>

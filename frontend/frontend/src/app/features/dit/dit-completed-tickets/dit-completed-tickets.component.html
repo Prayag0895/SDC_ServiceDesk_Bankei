@@ -13,7 +13,7 @@
     <div class="loading-state">Loading verification queue...</div>
   } @else if (tickets.length === 0) {
     <div class="empty-state">
-      <div class="icon">🎉</div>
+      <div class="icon app-icon">celebration</div>
       <h3>All Caught Up!</h3>
       <p>No completed tickets pending verification.</p>
       <a routerLink="/dit/home" class="btn-back">Return to Dashboard</a>
@@ -47,7 +47,7 @@
               </td>
               <td class="text-right">
                 <a [routerLink]="['/dit/closure', ticket.id]" class="btn-review">
-                  Review & Close →
+                  Review & Close <span class="app-icon">arrow_forward</span>
                 </a>
               </td>
             </tr>

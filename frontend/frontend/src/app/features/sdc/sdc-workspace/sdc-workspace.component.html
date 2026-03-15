@@ -2,14 +2,14 @@
   
   <div class="header">
     <div class="header-left">
-      <a routerLink="/sdc/home" class="back-link">← Back to Inbox</a>
+      <a routerLink="/sdc/home" class="back-link"><span class="app-icon">arrow_back</span> Back to Inbox</a>
       <h2>Workspace #{{ ticket?.id }}</h2>
     </div>
 
     <div class="header-right">
       @if (ticket) {
         <a [routerLink]="['/sdc/ticket', ticket.id]" class="btn-view-logs">
-          📜 View Audit Logs
+          <span class="app-icon">history</span> View Audit Logs
         </a>
       }
     </div>
@@ -44,14 +44,14 @@
           </div>
 
           @if (ticket.attachment) {
-            <a [href]="ticket.attachment" target="_blank" class="btn-file">📄 View Attachment</a>
+            <a [href]="ticket.attachment" target="_blank" class="btn-file"><span class="app-icon">description</span> View Attachment</a>
           }
         </div>
       </div>
 
       <div class="action-card">
         <div class="card-header">
-          <h3>⚡ Actions</h3>
+          <h3><span class="app-icon">bolt</span> Actions</h3>
         </div>
         
         <div class="card-body">
@@ -65,8 +65,8 @@
                 </div>
               }
 
-              <button class="btn-start" (click)="startWork()">▶ Start Work</button>
-              <button class="btn-revert" (click)="revertTicket()">↩ Wrong Domain? Revert</button>
+              <button class="btn-start" (click)="startWork()"><span class="app-icon">play_arrow</span> Start Work</button>
+              <button class="btn-revert" (click)="revertTicket()"><span class="app-icon">undo</span> Wrong Domain? Revert</button>
             </div>
           }
 
@@ -94,18 +94,18 @@
               </div>
 
               <button class="btn-log" (click)="openProgressModal()">
-                📝 Log Progress Note
+                <span class="app-icon">edit_note</span> Log Progress Note
               </button>
               <br>
               <button class="btn-complete" (click)="completeWork()">
-                ✅ Mark Completed
+                <span class="app-icon">task_alt</span> Mark Completed
               </button>
             </div>
           }
 
           @if (ticket.status === 'COMPLETED') {
             <div class="state-box done">
-              <p>✅ Work Finished. Waiting for PM Closure.</p>
+              <p><span class="app-icon">task_alt</span> Work Finished. Waiting for PM Closure.</p>
             </div>
           }
         </div>

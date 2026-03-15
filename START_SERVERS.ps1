@@ -1,9 +1,36 @@
 # SDC Service Desk - Start Both Servers
 # Run this script to start backend and frontend servers simultaneously
 
-$backendPath = "c:\Users\banke\Desktop\Modified\backend\backend\backend"
-$frontendPath = "c:\Users\banke\Desktop\Modified\frontend\frontend"
-$pythonExe = "C:\Users\banke\Desktop\Modified\backend\backend\.venv\Scripts\python.exe"
+$repoRoot = $PSScriptRoot
+$backendRoot = Join-Path $repoRoot "backend\backend"
+$backendPath = Join-Path $backendRoot "backend"
+$frontendPath = Join-Path $repoRoot "frontend\frontend"
+$pythonExe = Join-Path $backendRoot ".venv\Scripts\python.exe"
+
+if (-not (Test-Path $backendPath)) {
+    Write-Host "Backend path not found: $backendPath" -ForegroundColor Red
+    exit 1
+}
+
+if (-not (Test-Path $frontendPath)) {
+    Write-Host "Frontend path not found: $frontendPath" -ForegroundColor Red
+    exit 1
+}
+
+if (-not (Test-Path $pythonExe)) {
+    Write-Host "Python executable not found: $pythonExe" -ForegroundColor Red
+    Write-Host "Create the backend virtual environment first." -ForegroundColor Yellow
+    exit 1
+}
+
+$npmCommand = Get-Command npm.cmd -ErrorAction SilentlyContinue
+if (-not $npmCommand) {
+    $npmCommand = Get-Command npm -ErrorAction SilentlyContinue
+}
+if (-not $npmCommand) {
+    Write-Host "npm was not found in PATH. Install Node.js and try again." -ForegroundColor Red
+    exit 1
+}
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "SDC Service Desk - Starting Servers" -ForegroundColor Cyan
@@ -12,7 +39,9 @@ Write-Host ""
 
 # Check if PostgreSQL is running
 Write-Host "Checking PostgreSQL connection..." -ForegroundColor Yellow
-$pgConnection = & $pythonExe -c "from django.db import connection; connection.ensure_connection(); print('OK')" 2>$null
+Push-Location $backendPath
+$pgConnection = & $pythonExe -c "import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings'); import django; django.setup(); from django.db import connection; connection.ensure_connection(); print('OK')" 2>$null
+Pop-Location
 
 if ($pgConnection -match "OK") {
     Write-Host "✅ PostgreSQL is running" -ForegroundColor Green
@@ -23,12 +52,20 @@ if ($pgConnection -match "OK") {
 
 Write-Host ""
 Write-Host "Starting Django backend on http://localhost:8000..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$backendPath'; & '$pythonExe' manage.py runserver 0.0.0.0:8000; Read-Host 'Press Enter to close'"
+$backendProcess = Start-Process -FilePath $pythonExe -WorkingDirectory $backendPath -ArgumentList "manage.py", "runserver", "0.0.0.0:8000" -PassThru
 
 Start-Sleep -Seconds 2
 
 Write-Host "Starting Angular frontend on http://localhost:4200..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$frontendPath'; npm start; Read-Host 'Press Enter to close'"
+$frontendProcess = Start-Process -FilePath $npmCommand.Source -WorkingDirectory $frontendPath -ArgumentList "start" -PassThru
+
+Start-Sleep -Seconds 3
+if ($backendProcess.HasExited) {
+    Write-Host "⚠️  Backend process exited immediately (PID $($backendProcess.Id))." -ForegroundColor Yellow
+}
+if ($frontendProcess.HasExited) {
+    Write-Host "⚠️  Frontend process exited immediately (PID $($frontendProcess.Id))." -ForegroundColor Yellow
+}
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan

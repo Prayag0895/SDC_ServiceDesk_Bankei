@@ -62,7 +62,7 @@
   <div class="modal">
     <div class="modal-header">
       <h2>Create New Secondary Admin</h2>
-      <button class="icon-btn" (click)="closeCreateModal()" aria-label="Close">✕</button>
+      <button class="icon-btn" (click)="closeCreateModal()" aria-label="Close"><span class="app-icon">close</span></button>
     </div>
     <form [formGroup]="createAdminForm" (ngSubmit)="createSecondaryAdmin()" class="modal-body">
       <label>
@@ -101,7 +101,7 @@
   <div class="modal">
     <div class="modal-header">
       <h2>Reset Password for {{ selectedAdminName }}</h2>
-      <button class="icon-btn" (click)="closeResetPasswordModal()" aria-label="Close">✕</button>
+      <button class="icon-btn" (click)="closeResetPasswordModal()" aria-label="Close"><span class="app-icon">close</span></button>
     </div>
     <form [formGroup]="resetPasswordForm" (ngSubmit)="resetAdminPassword()" class="modal-body">
       <label>

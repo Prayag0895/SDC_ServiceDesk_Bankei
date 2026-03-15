@@ -6,49 +6,49 @@
 
   <div class="stats-grid">
     <!-- Total Users -->
-    <div class="stat-card">
-      <div class="stat-icon">👥</div>
+    <a class="stat-card" routerLink="/admin/users">
+      <div class="stat-icon app-icon">group</div>
       <div class="stat-content">
         <div class="stat-label">Total Users</div>
         <div class="stat-value">{{ stats.totalUsers }}</div>
       </div>
-    </div>
+    </a>
 
     <!-- Pending Approvals -->
-    <div class="stat-card highlight">
-      <div class="stat-icon">⏳</div>
+    <a class="stat-card highlight" routerLink="/admin/pending-approvals">
+      <div class="stat-icon app-icon">hourglass_top</div>
       <div class="stat-content">
         <div class="stat-label">Pending Approvals</div>
         <div class="stat-value">{{ stats.pendingApprovals }}</div>
       </div>
-    </div>
+    </a>
 
     <!-- Total Tickets -->
-    <div class="stat-card">
-      <div class="stat-icon">🎫</div>
+    <a class="stat-card" routerLink="/admin/tickets" [queryParams]="{ view: 'all' }">
+      <div class="stat-icon app-icon">confirmation_number</div>
       <div class="stat-content">
         <div class="stat-label">Total Tickets</div>
         <div class="stat-value">{{ stats.totalTickets }}</div>
       </div>
-    </div>
+    </a>
 
     <!-- Open Tickets -->
-    <div class="stat-card">
-      <div class="stat-icon">📂</div>
+    <a class="stat-card" routerLink="/admin/tickets" [queryParams]="{ view: 'open' }">
+      <div class="stat-icon app-icon">folder_open</div>
       <div class="stat-content">
         <div class="stat-label">Open Tickets</div>
         <div class="stat-value">{{ stats.openTickets }}</div>
       </div>
-    </div>
+    </a>
 
     <!-- Closed Tickets -->
-    <div class="stat-card">
-      <div class="stat-icon">✅</div>
+    <a class="stat-card" routerLink="/admin/tickets" [queryParams]="{ view: 'closed' }">
+      <div class="stat-icon app-icon">task_alt</div>
       <div class="stat-content">
         <div class="stat-label">Closed Tickets</div>
         <div class="stat-value">{{ stats.closedTickets }}</div>
       </div>
-    </div>
+    </a>
   </div>
 
   <div *ngIf="isLoading" class="loading-state">Loading admin stats...</div>
@@ -58,19 +58,19 @@
     <h2>Quick Actions</h2>
     <div class="action-buttons">
       <a routerLink="/admin/pending-approvals" class="action-btn primary">
-        <span class="btn-icon">👥</span>
+        <span class="btn-icon app-icon">group</span>
         <span>Review Pending Users</span>
       </a>
       <a routerLink="/admin/users" class="action-btn">
-        <span class="btn-icon">👤</span>
+        <span class="btn-icon app-icon">person</span>
         <span>Manage All Users</span>
       </a>
       <a routerLink="/admin/tickets" class="action-btn">
-        <span class="btn-icon">🎫</span>
+        <span class="btn-icon app-icon">confirmation_number</span>
         <span>View All Tickets</span>
       </a>
       <a routerLink="/admin/departments" class="action-btn">
-        <span class="btn-icon">🏢</span>
+        <span class="btn-icon app-icon">apartment</span>
         <span>Manage Departments</span>
       </a>
     </div>

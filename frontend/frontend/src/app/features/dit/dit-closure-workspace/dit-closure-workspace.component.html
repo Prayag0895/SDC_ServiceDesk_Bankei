@@ -2,12 +2,12 @@
   
   <div class="header">
     <div class="header-left">
-      <a routerLink="/dit/history" class="back-link">← Back to History</a>
+      <a routerLink="/dit/history" class="back-link"><span class="app-icon">arrow_back</span> Back to History</a>
       <h2>Closure Workspace #{{ ticket?.id }}</h2>
     </div>
     <div class="header-right">
       <a *ngIf="ticket" [routerLink]="['/dit/ticket', ticket.id]" class="btn-logs">
-        📜 Audit Logs
+        <span class="app-icon">history</span> Audit Logs
       </a>
     </div>
   </div>
@@ -41,7 +41,7 @@
               <span>{{ ticket.priority }}</span>
             </div>
 
-            <!-- ✅ NEW: SLA STATUS -->
+            <!-- SLA status -->
             <div class="info-item">
               <label>Work Status</label>
               <span
@@ -73,13 +73,13 @@
       <!-- ========================= -->
       <div class="action-card">
         <div class="card-header">
-          <h3>✅ Verification Console</h3>
+          <h3><span class="app-icon">task_alt</span> Verification Console</h3>
         </div>
         
         <div class="card-body">
           
           <div class="sla-check">
-            <div class="check-icon">⏱️</div>
+            <div class="check-icon app-icon">timer</div>
             <div class="check-text">
               <strong>SLA Compliance Check</strong>
               <small>
@@ -97,7 +97,7 @@
           <hr>
 
           <div class="logs-review-section">
-            <label class="section-label">📋 Work Performed (Logs)</label>
+            <label class="section-label"><span class="app-icon">assignment</span> Work Performed (Logs)</label>
             
             <div class="mini-logs-wrapper">
               @for (log of workLogs; track log.id) {
@@ -126,11 +126,11 @@
 
           <div class="action-buttons">
             <button class="btn-verify" (click)="verifyAndClose()">
-              🔒 Verify & Close Ticket
+              <span class="app-icon">lock</span> Verify & Close Ticket
             </button>
             
             <button class="btn-reopen" (click)="reopenTicket()">
-              ↩ Work Incomplete? Reopen
+              <span class="app-icon">undo</span> Work Incomplete? Reopen
             </button>
           </div>
 

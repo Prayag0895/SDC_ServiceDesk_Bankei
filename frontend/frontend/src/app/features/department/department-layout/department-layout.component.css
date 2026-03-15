@@ -148,6 +148,10 @@
   border: 1px solid transparent;
 }
 
+.logout-link {
+  cursor: pointer;
+}
+
 /* Hover State */
 .nav-links li a:hover {
   background-color: rgba(112, 119, 132, 0.08);

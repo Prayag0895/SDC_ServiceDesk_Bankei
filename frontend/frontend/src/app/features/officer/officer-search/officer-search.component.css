@@ -81,10 +81,33 @@ small { color: var(--ink-500); font-size: 0.8rem; }
 .closed{ background: rgba(11, 28, 44, 0.08); color: var(--ink-700); border: 1px solid rgba(11, 28, 44, 0.12); }
 
 .btn-audit {
-  text-decoration: none; background: #f8f9fa; border: 1px solid var(--border);
-  color: var(--ink-700); padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  line-height: 1;
+  text-decoration: none;
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  color: var(--ink-700);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
   transition: all 0.2s;
 }
+
+.btn-audit .app-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-audit .btn-label {
+  display: inline-block;
+  line-height: 1;
+}
+
 .btn-audit:hover { border-color: var(--primary); color: var(--primary); background: #e9ecef; }
 
 .empty-state { text-align: center; padding: 3rem; color: var(--ink-500); font-style: italic; }

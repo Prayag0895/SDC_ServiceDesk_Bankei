@@ -112,6 +112,7 @@ export const routes: Routes = [
       { path: 'pending-approvals', component: AdminPendingApprovalsComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'tickets', component: AdminTicketsComponent },
+      { path: 'ticket/:id', component: TicketDetailsComponent },
       { path: 'departments', component: AdminDepartmentsComponent },
       { path: 'ticket-categories', component: AdminTicketCategoriesComponent },
       { path: 'profile', component: AdminProfileComponent }
