@@ -70,7 +70,7 @@
           
           <div class="form-group">
             <label>1. Confirm Priority (SLA)</label>
-            <select [(ngModel)]="ticket.priority" class="domain-select">
+            <select [(ngModel)]="ticket.priority" class="domain-select" title="Confirm Priority">
               <option value="" disabled>Select Priority</option>
               @for (p of priorities; track p.code) {
                 <option [value]="p.code">{{ p.label }}</option>
@@ -81,7 +81,7 @@
 
           <div class="form-group">
             <label>2. Assign Technical Domain <span class="req">*</span></label>
-            <select [(ngModel)]="selectedDomain" class="domain-select">
+            <select [(ngModel)]="selectedDomain" class="domain-select" title="Assign Technical Domain">
               <option value="" disabled selected>-- Choose Team --</option>
               @for (d of domains; track d.id) {
                 <option [value]="d.value">{{ d.display }}</option>
