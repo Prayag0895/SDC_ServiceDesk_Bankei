@@ -47,6 +47,7 @@ export const routes: Routes = [
   { 
     path: 'department', 
     component: DepartmentLayoutComponent,
+    data: { role: 'DEPARTMENT' },
     children: [
       { path: 'home', component: DepartmentHomeComponent },         
       { path: 'my-tickets', component: TicketListComponent },        
@@ -59,6 +60,7 @@ export const routes: Routes = [
   { 
     path: 'dit', 
     component: DitLayoutComponent,
+    data: { role: 'DIT' },
     children: [
       { path: 'home', component: DitHomeComponent },
       { path: 'pending', component: DitPendingComponent },
@@ -75,6 +77,7 @@ export const routes: Routes = [
   { 
     path: 'sdc', 
     component: SdcLayoutComponent,
+    data: { role: 'SDC' },
     children: [
       { path: 'home', component: SdcHomeComponent },
       { path: 'pending', component: SdcPendingComponent }, 

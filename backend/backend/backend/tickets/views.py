@@ -144,7 +144,7 @@ class RejectTicketAPIView(APIView):
 
 class DitHistoryAPIView(generics.ListAPIView):
     serializer_class = TicketSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsDITUser]
 
     def get_queryset(self):
         return Ticket.objects.filter(

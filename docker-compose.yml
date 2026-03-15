@@ -2,17 +2,15 @@ services:
   backend:
     build:
       context: ./backend/backend
+    env_file:
+      - ./backend/backend/backend/.env
     environment:
-      DB_NAME: sdc
-      DB_USER: postgres
-      DB_PASSWORD: postgres
       DB_HOST: db
-      DB_PORT: "5432"
-      ALLOWED_HOSTS: localhost,127.0.0.1,backend
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   frontend:
     build:
       context: ./frontend/frontend
@@ -25,11 +23,16 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: sdc
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${DB_NAME:-sdc}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:

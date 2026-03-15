@@ -33,9 +33,9 @@
                 <div class="value">
                   {{ getTypeName(ticket.ticket_type) }} 
                   
-                  <span *ngIf="ticket.request_type">
-                      -> {{ getRequestName(ticket.request_type) }}
-                  </span>
+                  @if (ticket.request_type) {
+                    <span>-> {{ getRequestName(ticket.request_type) }}</span>
+                  }
                 </div>
             </div>
             <div class="detail-group">

@@ -6,15 +6,21 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // 1. Check if user has a token
-  if (authService.getToken()) {
-    
-    // Optional: Check if token is expired (requires jwt-decode library)
-    // For now, existence is enough.
-    return true;
+  if (!authService.getToken()) {
+    router.navigate(['/login']);
+    return false;
   }
 
-  // 2. If not logged in, redirect to login page
-  router.navigate(['/login']);
-  return false;
+  const requiredRole = route.data?.['role'] as string | undefined;
+  if (requiredRole) {
+    const userRole = authService.getRole();
+    const isAdmin = authService.isAdmin();
+    // Admins can access any route; others must match the required role
+    if (!isAdmin && userRole !== requiredRole) {
+      router.navigate(['/login']);
+      return false;
+    }
+  }
+
+  return true;
 };
