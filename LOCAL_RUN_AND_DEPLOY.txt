@@ -1,0 +1,208 @@
+SDC Service Desk - Local Run and Deployment Guide
+Date: March 17, 2026
+
+This guide is written for normal day-to-day use on Windows (PowerShell), and also covers Docker-based deployment.
+
+==================================================
+1) Run Locally (Without Docker)
+==================================================
+
+Prerequisites:
+- Python 3.11+ installed
+- Node.js 20+ and npm installed
+- PostgreSQL running locally (default: localhost:5432)
+
+Repository root in examples:
+- c:/Users/onlyi/OneDrive/Desktop/SDC_clone/SDC_ServiceDesk_Bankei
+
+----------------------------------------
+A. Backend setup and run
+----------------------------------------
+
+1. Open PowerShell and go to backend folder:
+   cd backend/backend
+
+2. Create virtual environment (if needed):
+   py -m venv .venv
+
+3. Activate virtual environment:
+   .\.venv\Scripts\Activate.ps1
+
+4. Install dependencies:
+   pip install -r requirements.txt
+
+5. Create/update environment file:
+   File location should be backend/backend/backend/.env
+
+   Example .env:
+   DB_NAME=sdc1
+   DB_USER=postgres
+   DB_PASSWORD=12345678
+   DB_HOST=localhost
+   DB_PORT=5432
+   SECRET_KEY=change-this-in-production
+   DEBUG=True
+   ALLOWED_HOSTS=localhost,127.0.0.1
+   CORS_ALLOWED_ORIGINS=http://localhost:4200,http://127.0.0.1:4200
+
+6. Run migrations:
+   cd backend
+   ..\.venv\Scripts\python.exe manage.py migrate
+
+7. Optional but recommended (seed data if commands exist):
+   ..\.venv\Scripts\python.exe manage.py seed_departments
+   ..\.venv\Scripts\python.exe manage.py seed_ticket_types
+
+8. Start backend server:
+   ..\.venv\Scripts\python.exe manage.py runserver 0.0.0.0:8000
+
+Backend should now be available at:
+- http://localhost:8000/api/
+
+----------------------------------------
+B. Frontend setup and run
+----------------------------------------
+
+1. Open a second PowerShell terminal.
+2. Go to frontend folder:
+   cd frontend/frontend
+
+3. Install dependencies (if first run):
+   npm install
+
+4. Start Angular app:
+   npm run start
+
+Frontend should now be available at:
+- http://localhost:4200
+
+----------------------------------------
+C. One-command local start (optional)
+----------------------------------------
+
+If your local paths match this repository layout, you can run:
+- .\START_SERVERS.ps1
+
+This script starts both backend and frontend processes.
+
+
+==================================================
+2) Run with Docker Compose (Development-style)
+==================================================
+
+From repository root:
+1. Confirm backend env file exists at:
+   backend/backend/backend/.env
+
+2. Start services:
+   docker compose up --build
+
+3. Access:
+- Frontend: http://localhost:4200
+- Backend API: http://localhost:8000/api/
+
+4. Stop:
+   docker compose down
+
+Tip:
+- Add -d for detached mode:
+  docker compose up -d --build
+
+
+==================================================
+3) Deploy with docker-compose.prod.yml
+==================================================
+
+This stack includes:
+- nginx (port 80)
+- backend (gunicorn)
+- frontend (Node/Angular runtime)
+- postgres
+
+----------------------------------------
+A. Pre-deploy checklist
+----------------------------------------
+
+Before production, update secrets and safety settings:
+- Set a strong DB password (not default postgres)
+- Set a strong admin password (not 123)
+- Set DEBUG=False
+- Set a long, unique SECRET_KEY
+- Set ALLOWED_HOSTS to your real domain/IP
+- Set CORS_ALLOWED_ORIGINS to your real frontend URL
+- Use HTTPS at your reverse proxy/load balancer
+
+----------------------------------------
+B. Verify env file path for prod compose
+----------------------------------------
+
+Current prod compose references:
+- ./backend/backend/backend/backend/.env
+
+If your .env file is actually at backend/backend/backend/.env,
+update docker-compose.prod.yml before deployment.
+
+----------------------------------------
+C. Start production stack
+----------------------------------------
+
+From repository root:
+1. Build and run:
+   docker compose -f docker-compose.prod.yml up -d --build
+
+2. Check status:
+   docker compose -f docker-compose.prod.yml ps
+
+3. Check logs (recommended right after first launch):
+   docker compose -f docker-compose.prod.yml logs -f nginx
+   docker compose -f docker-compose.prod.yml logs -f backend
+
+4. Verify app:
+- http://<server-ip-or-domain>/
+
+5. Stop stack when needed:
+   docker compose -f docker-compose.prod.yml down
+
+
+==================================================
+4) Useful maintenance commands
+==================================================
+
+Rebuild only backend service:
+- docker compose -f docker-compose.prod.yml up -d --build backend
+
+Run migrations inside backend container:
+- docker compose -f docker-compose.prod.yml exec backend python manage.py migrate
+
+Create/update admin user inside backend container:
+- docker compose -f docker-compose.prod.yml exec backend python manage.py createsuperuser
+
+
+==================================================
+5) Common issues and quick fixes
+==================================================
+
+Issue: Backend cannot connect to DB
+Fix:
+- Confirm PostgreSQL is running
+- Recheck DB_HOST/DB_PORT/DB credentials in .env
+- If using Docker, ensure DB_HOST=db
+
+Issue: CORS error in browser
+Fix:
+- Confirm frontend URL is included in CORS_ALLOWED_ORIGINS
+- Use consistent hostnames (localhost vs 127.0.0.1)
+
+Issue: Frontend build/start fails
+Fix:
+- Delete node_modules and reinstall:
+  Remove-Item -Recurse -Force node_modules
+  npm install
+
+Issue: Backend dependency errors
+Fix:
+- Activate venv and reinstall:
+  pip install -r requirements.txt
+
+
+End of guide.
