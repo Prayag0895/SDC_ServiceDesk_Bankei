@@ -52,10 +52,10 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-username = os.getenv("ADMIN_USERNAME", "admin")
-password = os.getenv("ADMIN_PASSWORD", "123")
-email = os.getenv("ADMIN_EMAIL", "admin@sdc.local")
-role = os.getenv("ADMIN_ROLE", "OFFICER")
+username = "admin"
+password = "123"
+email = "admin@sdc.local"
+role = "OFFICER"
 
 user, _ = User.objects.get_or_create(username=username, defaults={"email": email})
 user.email = email
@@ -71,18 +71,14 @@ user.save()
 print(f"[entrypoint] Admin ready: {username}")
 PY
 
-if [ "${SEED_MASTER_DATA:-true}" = "true" ]; then
-    echo "[entrypoint] Seeding departments and domains..."
-    python manage.py seed_departments || true
+echo "[entrypoint] Seeding departments and domains..."
+python manage.py seed_departments || true
 
-    echo "[entrypoint] Seeding ticket and request types..."
-    python manage.py seed_ticket_types || true
-fi
+echo "[entrypoint] Seeding ticket and request types..."
+python manage.py seed_ticket_types || true
 
-if [ "${SEED_DEMO_USERS:-false}" = "true" ]; then
-    echo "[entrypoint] Seeding demo users..."
-    python manage.py seed_users || true
-fi
+echo "[entrypoint] Seeding demo users..."
+python manage.py seed_users || true
 
 echo "[entrypoint] Starting gunicorn..."
 exec gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120

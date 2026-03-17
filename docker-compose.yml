@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend/backend
     env_file:
-      - ./backend/backend/backend/.env
+      - ./backend/backend/backend/backend/.env
     environment:
       DB_HOST: db
     ports:
