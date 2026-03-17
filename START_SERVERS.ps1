@@ -39,6 +39,16 @@ Write-Host ""
 
 # Check if PostgreSQL is running
 Write-Host "Checking PostgreSQL connection..." -ForegroundColor Yellow
+$useLocalDbHostOverride = $false
+$envFilePath = Join-Path $backendPath "backend\.env"
+$configuredDbHost = $null
+if (Test-Path $envFilePath) {
+    $dbHostLine = Get-Content $envFilePath | Where-Object { $_ -match '^DB_HOST=' } | Select-Object -First 1
+    if ($dbHostLine) {
+        $configuredDbHost = ($dbHostLine -replace '^DB_HOST=', '').Trim()
+    }
+}
+
 Push-Location $backendPath
 $pgConnection = & $pythonExe -c "import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings'); import django; django.setup(); from django.db import connection; connection.ensure_connection(); print('OK')" 2>$null
 Pop-Location
@@ -46,12 +56,45 @@ Pop-Location
 if ($pgConnection -match "OK") {
     Write-Host "✅ PostgreSQL is running" -ForegroundColor Green
 } else {
-    Write-Host "⚠️  Warning: Could not verify PostgreSQL connection" -ForegroundColor Yellow
-    Write-Host "   Make sure PostgreSQL is running on localhost:5432" -ForegroundColor Yellow
+    if ($configuredDbHost -eq "db") {
+        Write-Host "⚠️  DB_HOST is 'db' (Docker host). Applying local override DB_HOST=localhost for this session." -ForegroundColor Yellow
+        $env:DB_HOST = "localhost"
+        $useLocalDbHostOverride = $true
+
+        Push-Location $backendPath
+        $pgConnection = & $pythonExe -c "import os; os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings'); import django; django.setup(); from django.db import connection; connection.ensure_connection(); print('OK')" 2>$null
+        Pop-Location
+
+        if ($pgConnection -match "OK") {
+            Write-Host "✅ PostgreSQL is running (using DB_HOST=localhost override)" -ForegroundColor Green
+        } else {
+            Write-Host "⚠️  Warning: Could not verify PostgreSQL connection even after DB_HOST override" -ForegroundColor Yellow
+            Write-Host "   Make sure PostgreSQL is running on localhost:5432" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "⚠️  Warning: Could not verify PostgreSQL connection" -ForegroundColor Yellow
+        Write-Host "   Make sure PostgreSQL is running on localhost:5432" -ForegroundColor Yellow
+    }
 }
 
 Write-Host ""
 Write-Host "Starting Django backend on http://localhost:8000..." -ForegroundColor Yellow
+$bootstrapStatus = $null
+Write-Host "Bootstrapping default admin and seed data..." -ForegroundColor Yellow
+Push-Location $backendPath
+$bootstrapStatus = & $pythonExe manage.py bootstrap_defaults 2>&1
+Pop-Location
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "⚠️  Bootstrap command failed. Backend may still start, but initial login/seed data might be missing." -ForegroundColor Yellow
+    Write-Host "   Details: $bootstrapStatus" -ForegroundColor Yellow
+} else {
+    Write-Host "✅ Bootstrap complete (admin + seed data ready)" -ForegroundColor Green
+}
+
+if ($useLocalDbHostOverride) {
+    Write-Host "Using DB_HOST=localhost override for backend process in this shell session." -ForegroundColor Cyan
+}
+
 $backendProcess = Start-Process -FilePath $pythonExe -WorkingDirectory $backendPath -ArgumentList "manage.py", "runserver", "0.0.0.0:8000" -PassThru
 
 Start-Sleep -Seconds 2

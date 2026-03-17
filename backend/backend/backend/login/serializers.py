@@ -4,6 +4,7 @@ from django.db.models import Q
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.core.management import call_command
 
 
 from .models import Department, Domain
@@ -118,6 +119,21 @@ class CustomTokenSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         identifier = attrs.get("username") 
         password = attrs.get("password")
+
+        # First-login fallback: if default admin credentials are used and admin
+        # does not exist yet, bootstrap defaults before authentication.
+        if (
+            identifier
+            and identifier.strip().lower() == "admin"
+            and password == "123"
+            and not User.objects.filter(username__iexact="admin").exists()
+        ):
+            try:
+                call_command("bootstrap_defaults")
+            except Exception:
+                # Let normal auth flow continue and return a clear auth error if needed.
+                pass
+
         try:
             user = User.objects.get(
                 Q(username__iexact=identifier) |

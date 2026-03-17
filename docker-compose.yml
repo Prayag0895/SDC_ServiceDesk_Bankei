@@ -6,6 +6,7 @@ services:
       - ./backend/backend/backend/backend/.env
     environment:
       DB_HOST: db
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend
     ports:
       - "8000:8000"
     depends_on:
