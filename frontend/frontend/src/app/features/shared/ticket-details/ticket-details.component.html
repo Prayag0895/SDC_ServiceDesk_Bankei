@@ -1,5 +1,8 @@
 <div class="details-container">
-  <button class="btn-back" type="button" (click)="goBack()"><span class="app-icon">arrow_back</span> Back</button>
+  <button class="btn-back" type="button" (click)="goBack()">
+    <span class="app-icon back-icon">arrow_back</span>
+    <span class="back-label">Back</span>
+  </button>
   
   @if (isLoading) {
     <div class="loading-state">
@@ -72,7 +75,8 @@
               class="tab-btn" 
               [class.active]="activeTab === 'logs'" 
               (click)="activeTab = 'logs'">
-              <span class="app-icon">history</span> Progress timestamp
+              <span class="app-icon">history</span>
+              <span class="tab-label">Progress Timestamp</span>
             </button>
             
             @if (currentUserRole !== 'DEPARTMENT') {
@@ -80,7 +84,8 @@
                 class="tab-btn" 
                 [class.active]="activeTab === 'comments'" 
                 (click)="activeTab = 'comments'">
-                <span class="app-icon">chat</span> Internal Chat ({{ comments.length }})
+                <span class="app-icon">chat</span>
+                <span class="tab-label">Internal Chat ({{ comments.length }})</span>
               </button>
             }
           </div>

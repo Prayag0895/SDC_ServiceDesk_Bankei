@@ -127,7 +127,9 @@
 .btn-open {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  line-height: 1;
   background-color: rgba(15, 118, 110, 0.12);
   color: var(--primary-strong);
   padding: 8px 16px;
@@ -146,6 +148,8 @@
 }
 
 .btn-open .arrow {
+  line-height: 1;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 

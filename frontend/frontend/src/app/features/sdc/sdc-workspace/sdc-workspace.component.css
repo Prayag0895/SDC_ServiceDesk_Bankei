@@ -263,6 +263,17 @@ button:active {
 }
 .btn-log:hover { background-color: #ea580c; }
 
+.btn-log .log-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-log .log-label {
+  display: inline-block;
+  line-height: 1;
+}
+
 .btn-revert {
   background-color: transparent;
   border: 2px solid var(--border);

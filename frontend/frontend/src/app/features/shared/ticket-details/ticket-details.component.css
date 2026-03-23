@@ -8,13 +8,32 @@
 
 .btn-back {
   margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   background: #f8fafc;
   border: 1px solid #dbe2ea;
   color: #1f2937;
   border-radius: 8px;
   padding: 0.45rem 0.85rem;
   font-weight: 600;
+  line-height: 1;
   cursor: pointer;
+}
+
+.btn-back .back-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+  flex-shrink: 0;
+  position: relative;
+  top: 1px;
+}
+
+.btn-back .back-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .btn-back:hover {
@@ -126,8 +145,20 @@ h2 { margin: 0; color: #2c3e50; font-size: 1.5rem; }
   display: flex; background: #f8f9fa; border-bottom: 1px solid #eee;
 }
 .tab-btn {
-  flex: 1; padding: 15px; border: none; background: transparent; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; line-height: 1; padding: 15px; border: none; background: transparent; font-weight: 600; color: #7f8c8d; cursor: pointer; transition: all 0.2s; border-bottom: 3px solid transparent;
 }
+
+.tab-btn .app-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tab-btn .tab-label {
+  display: inline-block;
+  line-height: 1;
+}
+
 .tab-btn:hover { background: #f0f0f0; color: #2c3e50; }
 .tab-btn.active { background: white; color: #3498db; border-bottom-color: #3498db; }
 

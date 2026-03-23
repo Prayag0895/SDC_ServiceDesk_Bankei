@@ -210,6 +210,11 @@
 
 /* Workspace Button */
 .btn-workspace {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  line-height: 1;
   text-decoration: none;
   background-color: var(--primary);
   color: white;
@@ -219,7 +224,17 @@
   font-weight: 600;
   border: none;
   transition: background-color 0.2s;
+}
+
+.btn-workspace .workspace-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-workspace .workspace-label {
   display: inline-block;
+  line-height: 1;
 }
 
 .btn-workspace:hover {
